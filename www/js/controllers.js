@@ -41,15 +41,37 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.controller('PlaylistsCtrl', function($scope, $cordovaGeolocation, $ionicPlatform, $http) {
+	
+	var posOptions = {timeout: 10000, enableHighAccuracy: false};
+	
+	//GET CURERENT COORDS ON DEVICE
+	$ionicPlatform.ready(function(){
+		$cordovaGeolocation.getCurrentPosition(posOptions)
+			.then(function (position) {
+			$scope.coords = position.coords;
+		}, function(err) {
+			console.log("error " + angular.toJson(err));
+		});	
+	});
+
+	
+    $scope.getRestaurantData =  function(){
+		$http.get("mock.json")
+			.then(function(response) {
+			console.log("json fetched");
+			$scope.positions = response.data;
+			console.log($scope.positions);
+		});
+		
+	};
+	
+    $scope.showData = function() {
+      alert(this.data.foo);
+    };
+ 
+	
+  
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
