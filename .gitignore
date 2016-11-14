@@ -1,6 +1,21 @@
+<<<<<<< HEAD
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
 node_modules/
 platforms/
 plugins/
+=======
+.*.sw*
+node_modules/
+.idea/*
+demo/platforms/*
+demo/plugins/*
+_site
+bower_components
+coverage
+Gemfile.lock
+.DS_Store*
+npm-debug.log
+.project
+>>>>>>> 6463412ad3d3dc91972db846c005aded841824ba

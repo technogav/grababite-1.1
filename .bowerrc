@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
   "directory": "www/lib"
+=======
+  "directory": "./bower_components"
+>>>>>>> 6463412ad3d3dc91972db846c005aded841824ba
 }
