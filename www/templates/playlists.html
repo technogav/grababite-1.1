@@ -1,5 +1,54 @@
 <ion-view view-title="Playlists">
-  <ion-content>
-	  <button ng-click="getRestaurantData()" value="">Get Restaurants</button>
-  </ion-content>
+	<ion-content>
+		<!--<ng-map default-style="true" center="41,-87" zoom="3">
+		  <marker id='{{shop.id}}' position="{{shop.position}}"
+			ng-repeat="shop in vm.shops"
+			on-click="vm.showDetail(shop)">
+		  </marker>
+
+		  <!--<info-window id="foo-iw">
+			<div ng-non-bindable="">
+			  id: {{vm.shop.id}}<br/>
+			  name: {{vm.shop.name}}<br/>
+			  Position 1: {{vm.shop.position}}<br/>
+			  Position 2: {{anchor.getPosition()}}<br/>
+			  Position 3: {{vm.map.markers[vm.shop.id].getPosition()}}<br/>
+			  <a href="#" ng-click="vm.clicked()">Click Here</a>
+			</div>
+		  </info-window>
+		</ng-map>
+
+		<button ng-click="vm.showDetail(e, vm.shop)">
+		  show InfoWindow of the shop
+		</button>
+		<button ng-click="vm.hideDetail(e, vm.shop)">
+		  Hide InfoWindow of the shop
+		</button>-->
+	
+	
+	
+	
+		<ng-map zoom="11" center="[{{coords.latitude}}, {{coords.longitude}}]">
+			<marker ng-repeat="p in positions"
+					position="{{p.pos}}"
+					data="{{data[$index]}}"
+					on-click="showDetail(p)"
+					title="pos: {{p.pos}}">
+			</marker>
+			<info-window id="foo-iw">
+				
+				
+					
+					<!--id: {{restaurant.id}}<br/>
+					name: {{restaurant.name}}<br/>
+					Position 1: {{vm.shop.position}}<br/>
+					Position 2: {{anchor.getPosition()}}<br/>
+					Position 3: {{vm.map.markers[vm.shop.id].getPosition()}}<br/>
+					<a href="#" ng-click="{{clicked()}}">Click Here</a>-->
+				
+			</info-window>
+		</ng-map>
+		
+		
+	</ion-content>
 </ion-view>
