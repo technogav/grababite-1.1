@@ -1,0 +1,14 @@
+{
+    "id": 1,
+    "name": "The green door",
+    "description": "The green door is a fine dining restaurant",
+	"deal": "2 for One dining tonight",
+    "coords": ["54.1536", "-6.73495"]
+},
+{
+    "id": 2,
+    "name": "The flaming Wok",
+    "description": "The flaming Wok is a fine dining restaurant",
+	"deal": "2 for One dining tonight",
+    "coords": ["54.14978", "-6.743545"]
+}
