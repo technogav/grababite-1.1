@@ -1,0 +1,17 @@
+<ion-view view-title="Playlists">
+  <ion-content>
+   <div class="bar bar-header item-input-inset">
+  <label class="item-input-wrapper">
+    <i class="icon ion-ios-search placeholder-icon"></i>
+    <input type="search" placeholder="Search">
+  </label>
+  <button class="button button-clear">
+    Cancel!
+  </button>
+</div>
+    <ng-map id="map" data-tap-disable="true" zoom="14" center="{{center}}"> <!--city center 53.3450897,-6.2638032-->
+      <marker ng-repeat="r in getRestaurantDetails" position="{{r.coords}}"></marker>
+    </ng-map>
+
+  </ion-content>
+</ion-view>
