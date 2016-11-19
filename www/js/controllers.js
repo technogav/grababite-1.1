@@ -41,11 +41,58 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope ,$cordovaGeolocation, $ionicPlatform) {
+.controller('PlaylistsCtrl', function($scope, $http, $cordovaGeolocation, $ionicPlatform, RestaurantService, NgMap) {
+		'use strict';
+	var main = this;
+	main.newRestaurant = {
+				"id": "",
+				"name": "",
+				"description": "",
+				"deal": "",
+				"coords": []
+	};
+	$scope.restaurants = RestaurantService.getRestaurants();
 	
-	$scope.hello = "hello";
+	/*NgMap.getMap().then(function(map) {
+		console.log('map', map);
+		main.map = map;
+	  });
+
+	  main.clicked = function() {
+		alert('Clicked a link inside infoWindow');
+	  };
+
+	  
+	  main.restaurant = $scope.restaurants[0];
+
+	  main.showDetail = function(e, restaurant) {
+		main.restaurant = restaurant;
+		main.map.showInfoWindow('foo-iw', restaurant.id);
+	  };
+
+	  main.hideDetail = function() {
+		main.map.hideInfoWindow('foo-iw');
+	  };
+	*/
+	
+	
+	
+	main.addRestaurantDetails = function(){
+		'use strict';
+		RestaurantService.addRestaurantDetails(angular.copy(main.newRestaurant));
+		main.newRestaurant = {
+				"id": "",
+				"name": "",
+				"description": "",
+				"deal": "",
+				"coords": []
+		};
+		
+	};
+	
 	
 
+	
 	//GET CURERENT COORDS ON DEVICE
 	$ionicPlatform.ready(function(){
 		var posOptions = {timeout: 10000, enableHighAccuracy: true};
@@ -62,36 +109,7 @@ angular.module('starter.controllers', [])
 	});
 	
 	$scope.center = [53.3450897, -6.2638032];
-	$scope.getRestaurantDetails  = [
-			{
-				"id": 1,
-				"name": "Dublin Castle",
-				"description": "Dublin castle, food fit for a king",
-				"deal": "2 for One dining tonight",
-				"coords": [53.3428848 , -6.2674266]
-				},
-				{
-				"id": 2,
-				"name": "The Brazen Head",
-				"description": "Restaurant with BOLD flavour",
-				"deal": "2 for One dining tonight",
-				"coords": [53.3449312, -6.2763315]
-			},
-		{
-				"id": 3,
-				"name": "St. James",
-				"description": "'Fresh Food' served in the comfort of your own bed (or trolly)",
-				"deal": "2 for One dining tonight",
-				"coords": [53.3400471, -6.2941736]
-				},
-				{
-				"id": 4,
-				"name": "Dicey's",
-				"description": "Roll on up and give us a 'chance'",
-				"deal": "2 for One dining tonight",
-				"coords": [53.3358639, -6.2635589]
-			}
-		];
+	
 		
 		
 		
@@ -104,7 +122,30 @@ angular.module('starter.controllers', [])
   $interval(function() {
     
   }, 2000);
-});*/
+});
+
+custom marker
+var vm = this;
+    vm.image = {
+      url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      size: [20, 32],
+      origin: [0,0],
+      anchor: [0, 32]
+    };
+    vm.shape = {
+      coords: [1, 1, 1, 20, 18, 20, 18 , 1],
+      type: 'poly'
+    };
+    vm.beaches = [
+      ['Bondi Beach', -33.890542, 151.274856, 4],
+      ['Coogee Beach', -33.923036, 151.259052, 5],
+      ['Cronulla Beach', -34.028249, 151.157507, 3],
+      ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+      ['Maroubra Beach', -33.950198, 151.259302, 1]
+    ];
+  });
+  
+  */
 
 })
 

@@ -125,30 +125,26 @@ angular.module('starter.controllers', [])
 
 	/*$scope.hideDetail = function() {
 		$scope.map.hideInfoWindow('foo-iw');
-	};
-		$scope.getRestaurantDetails = function(){
-               
-			
-			
-			var restaurantDetails = (function)
-               return restaurantDetails;    
-         } */
+	};*/
 	
-		/*$http({
-			method: 'GET',
-			url: 'mock.json'
-			})
-		.then(function successCallback(response) {
-			// this callback will be called asynchronously
-			console.log('success');
-			// when the response is available
-			}, 
-			  
-		function errorCallback(response) {
-			// called asynchronously if an error occurs
-			console.log('no success');
-			// or server returns response with an error status.
-			});*/
+		$scope.getRestaurantDetails = function(){
+
+			var restaurantDetails;
+				$http({
+					method: 'GET',
+					url: 'www/mock.json'
+					})
+				.then(function successCallback(response) {
+					// this callback will be called asynchronously
+					console.log('response');
+					// when the response is available
+					});/**/
+				return restaurantDetails;
+			
+                   
+         } 
+	
+		
 	
 		
 

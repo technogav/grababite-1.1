@@ -1,4 +1,4 @@
-{
+[{
     "id": 1,
     "name": "The green door",
     "description": "The green door is a fine dining restaurant",
@@ -11,4 +11,4 @@
     "description": "The flaming Wok is a fine dining restaurant",
 	"deal": "2 for One dining tonight",
     "coords": ["54.14978", "-6.743545"]
-}
+}]

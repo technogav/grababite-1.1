@@ -1,5 +1,21 @@
-<ion-view view-title="Browse">
+<ion-view view-title="Restaurant Input Page">
   <ion-content>
-    <h1>Browse</h1>
+    <form class="form-inline" role="form" novalidate ng-submit="main.addRestaurantDetails()">
+		<div class="form-group">
+			<input type="text" class="form-control" ng-model="main.newRestaurant.id" placeholder="Enter ID"/>
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control" ng-model="main.newRestaurant.name" placeholder="Enter Name"/>
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control" ng-model="main.newRestaurant.description" placeholder="Enter Description"/>
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control" ng-model="main.newRestaurant.deal" placeholder="Enter Deal"/>
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control" ng-model="main.newRestaurant.coords" placeholder="Enter coords"/>
+		</div>
+	  </form>
   </ion-content>
 </ion-view>
