@@ -92,23 +92,31 @@ angular.module('starter.controllers', [])
 	
 	
 
-	
+	$scope.coords = [];
 	//GET CURERENT COORDS ON DEVICE
 	$ionicPlatform.ready(function(){
 		var posOptions = {timeout: 10000, enableHighAccuracy: true};
 		$cordovaGeolocation.getCurrentPosition(posOptions)
 			.then(function (position) {
+				
 			
-				$scope.coords = position.coords;
+					$scope.coords = position.coords;
+				
+			
+				
 				//call the generate marker method
 				/*$scope.positions = $scope.generateMarkers($scope.coords);*/
 				
 		}, function(err) {
 			console.log(err);
-		});	
+		});
+		console.log(2 + $scope.coords);
 	});
 	
-	$scope.center = [53.3450897, -6.2638032];
+	$scope.repositionMap = function(){
+		
+		$scope.coords = [{latitude: 53.3450897},{longitude: -6.2638032}];
+	}
 	
 		
 		
