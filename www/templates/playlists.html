@@ -4,14 +4,15 @@
    <div class="bar bar-header item-input-inset">
   <label class="item-input-wrapper">
     <i class="icon ion-ios-search placeholder-icon"></i>
-    <input type="search" placeholder="Search">
-	  <span ng-click="repositionMap()" class="icon ion-funnel"></span>
+    <input ng-model="search" type="search" id="search" placeholder="Search">
+	  
   </label>
   <button class="button button-clear">
     Cancel!
   </button>
+	   <i class= "icon ion-funnel" ng-click="repositionMap()"></i>
 </div>
-    <ng-map id="map" data-tap-disable="true" zoom="14" center="[{{coords.latitude}},{{coords.longitude}}]"
+    <ng-map id="map" data-tap-disable="true" zoom="14" center="[{{lat}},{{long}}]"
      	disable-default-u-i="true" styles="[{featureType:'road.highway',elementType:'geometry',stylers:[{hue:'#990000'},{saturation:60},{lightness:-20}]},{featureType:'road.arterial',elementType:'all',stylers:[{hue:'#990000'},{lightness:-40},{visibility:'simplified'},{saturation:30}]},{featureType:'road.local',elementType:'all',stylers:[{hue:'#f6ff00'},{saturation:50},{gamma:0.7},{visibility:'simplified'}]},{featureType:'water',elementType:'geometry',stylers:[{saturation:40},{lightness:40}]},{featureType:'road.highway',elementType:'labels',stylers:[{visibility:'on'},{saturation:98}]},{featureType:'administrative.locality',elementType:'labels',stylers:[{hue:'#0022ff'},{saturation:50},{lightness:-10},{gamma:0.90}]},{featureType:'transit.line',elementType:'geometry',stylers:[{hue:'#ff0000'},{visibility:'on'},{lightness:-70}]}]"> <!--city center 53.3450897,-6.2638032-->
       <marker ng-repeat="r in restaurants" position="{{r.coords}}"></marker>
       <info-window id="foo-iw">

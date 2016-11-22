@@ -41,9 +41,11 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope, $http, $cordovaGeolocation, $ionicPlatform, RestaurantService, NgMap) {
+.controller('PlaylistsCtrl', function($scope, $http, $cordovaGeolocation, $ionicPlatform, RestaurantService, NgMap) {//
 		'use strict';
 	var main = this;
+	
+	
 	main.newRestaurant = {
 				"id": "",
 				"name": "",
@@ -53,12 +55,49 @@ angular.module('starter.controllers', [])
 	};
 	$scope.restaurants = RestaurantService.getRestaurants();
 	
-	/*NgMap.getMap().then(function(map) {
+	
+	NgMap.getMap().then(function(map) {
 		console.log('map', map);
 		main.map = map;
-	  });
+	});
+	$scope.lat = "" ;
+	$scope.long = "" ;
+	$scope.mapOptions = {
+			zoom: 15		
+	};
 
-	  main.clicked = function() {
+	$ionicPlatform.ready(function(){
+		var posOptions = {timeout: 10000, enableHighAccuracy: true};
+		$cordovaGeolocation.getCurrentPosition(posOptions)
+			.then(function (position) {		
+					$scope.lat = position.coords.latitude;console.log($scope.lat);
+					$scope.long = position.coords.longitude;
+				
+				//call the generate marker method
+				/*$scope.positions = $scope.generateMarkers($scope.coords);*/
+				
+		}, function(err) {
+			console.log(err);
+		});
+		
+	});
+	
+	
+	
+	
+	
+		
+	 $scope.onMapIdle = function() {
+      var updateCenter = function() {
+        var ll = new google.maps.LatLng($scope.lat, $scope.long);
+        $scope.myMap.panTo(ll)
+        	
+        
+      }
+      $scope.$watch('lat', updateCenter);
+      $scope.$watch('long', updateCenter);
+    };
+	 /* main.clicked = function() {
 		alert('Clicked a link inside infoWindow');
 	  };
 
@@ -74,11 +113,9 @@ angular.module('starter.controllers', [])
 		main.map.hideInfoWindow('foo-iw');
 	  };
 	*/
-	
-	
-	
+		
 	main.addRestaurantDetails = function(){
-		'use strict';
+		
 		RestaurantService.addRestaurantDetails(angular.copy(main.newRestaurant));
 		main.newRestaurant = {
 				"id": "",
@@ -91,32 +128,48 @@ angular.module('starter.controllers', [])
 	};
 	
 	
-
-	$scope.coords = [];
 	//GET CURERENT COORDS ON DEVICE
-	$ionicPlatform.ready(function(){
-		var posOptions = {timeout: 10000, enableHighAccuracy: true};
-		$cordovaGeolocation.getCurrentPosition(posOptions)
-			.then(function (position) {
-				
-			
-					$scope.coords = position.coords;
-				
-			
-				
-				//call the generate marker method
-				/*$scope.positions = $scope.generateMarkers($scope.coords);*/
-				
-		}, function(err) {
-			console.log(err);
-		});
-		console.log(2 + $scope.coords);
-	});
+	
+	
 	
 	$scope.repositionMap = function(){
+		//get the long lat coords from the choice
+		/*var lat = "";
+		var lng = "";
+		if(){*/ 
+			console.log('1');
+			//extract the location using
+			//var address = $(#searchButton).value;
+			var url = "http://maps.google.com/maps/api/geocode/json?address=dublin ireland";
+				$http({
+					method: 'GET',
+					url: url
+				}).then(function successCallback(response) {
+					var releventMapData = response.data.results[0];
+					var searched_lat = releventMapData.geometry.location.lat;
+					var searched_long = releventMapData.geometry.location.lng;
+					$scope.lat = searched_lat;
+					$scope.long = searched_long;
+					
+				}, function errorCallback(response) {
+					console.log(response.message);
+				});
+			
+			/*//append location to url string http://maps.google.com/maps/api/geocode/json?address=append+this+new,+address
+			//send ajax request to this url string
+			//then update the  $scope.coords
+					//!? use a listener for change to refresh the map view!?*/
+	};
+			//get the map object from the dom
+				//might be a better idea to set the map center in the dom for real time experience
+			
+			
+			//set $scope.coords.latitude == new lat and set $scope.coords.longitude == new long
+			//apply the new coords to the map
+				//maybe a refresh this will require a spinner
 		
-		$scope.coords = [{latitude: 53.3450897},{longitude: -6.2638032}];
-	}
+		//$scope.coords = [{latitude: 53.3450897},{longitude: -6.2638032}];
+	
 	
 		
 		
