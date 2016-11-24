@@ -2,42 +2,38 @@
  
   <ion-content>
    <div class="bar bar-header item-input-inset">
-  <label class="item-input-wrapper">
-    <i class="icon ion-ios-search placeholder-icon"></i>
-    <input ng-model="search" type="search" id="search" placeholder="Search">
-	  
-  </label>
-  <button class="button button-clear">
-    Cancel!
-  </button>
-	   <i class= "icon ion-funnel" ng-click="repositionMap()"></i>
+  <form ng-submit="repositionMap(searchbar)"> 
+	  <label class="item-input-wrapper">
+		<i class="icon ion-ios-search placeholder-icon"></i>
+		<input ng-model="searchbar" type="search" id="search" placeholder="Search">
+	  	<input type="submit" id="submitSearch" value="submit">
+	  </label>
+  </form>
+	   <i class= "icon ion-funnel" ng-click=""></i>
 </div>
     <ng-map id="map" data-tap-disable="true" zoom="14" center="[{{lat}},{{long}}]"
      	disable-default-u-i="true" styles="[{featureType:'road.highway',elementType:'geometry',stylers:[{hue:'#990000'},{saturation:60},{lightness:-20}]},{featureType:'road.arterial',elementType:'all',stylers:[{hue:'#990000'},{lightness:-40},{visibility:'simplified'},{saturation:30}]},{featureType:'road.local',elementType:'all',stylers:[{hue:'#f6ff00'},{saturation:50},{gamma:0.7},{visibility:'simplified'}]},{featureType:'water',elementType:'geometry',stylers:[{saturation:40},{lightness:40}]},{featureType:'road.highway',elementType:'labels',stylers:[{visibility:'on'},{saturation:98}]},{featureType:'administrative.locality',elementType:'labels',stylers:[{hue:'#0022ff'},{saturation:50},{lightness:-10},{gamma:0.90}]},{featureType:'transit.line',elementType:'geometry',stylers:[{hue:'#ff0000'},{visibility:'on'},{lightness:-70}]}]"> <!--city center 53.3450897,-6.2638032-->
-      <marker ng-repeat="r in restaurants" position="{{r.coords}}"></marker>
+     	
+     	
+      <marker id="{{r.id}}" position="{{r.coords}}"
+        on-click="showDetail(r)" ng-repeat="r in restaurants"
+        >
+      </marker>
+
+      
       <info-window id="foo-iw">
         <div ng-non-bindable="">
-          id: {{main.restaurant.id}}<br/>
-          name: {{main.restaurant.name}}<br/>
-          Position 1: {{main.restaurant.position}}<br/>
-          Position 2: {{anchor.getPosition()}}<br/>
-          Position 3: {{main.map.markers[main.restaurant.id].getPosition()}}<br/>
-          <a href="#" ng-click="vm.clicked()">Click Here</a>
+          id: <br/>
+          name: <br/>
+          Position 1: <br/>
+          Position 2: <br/>
+          Position 3: <br/>
+          <a href="#" ng-click="">Click Here</a>
         </div>
       </info-window>
       
     </ng-map>
 	  
-<div class="tabs">
-  <a class="tab-item ">
-    Home
-  </a>
-  <a class="tab-item">
-    Favorites
-  </a>
-  <a class="tab-item">
-    Settings
-  </a>
-</div>
+
   </ion-content>
 </ion-view>

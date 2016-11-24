@@ -44,22 +44,36 @@ angular.module('starter.controllers', [])
 .controller('PlaylistsCtrl', function($scope, $http, $cordovaGeolocation, $ionicPlatform, RestaurantService, NgMap) {
 		'use strict';
 	var main = this;
+	$scope.search = "";
+	
+	main.newRestaurant = {
+				"id": "",
+				"name": "",
+				"description": "",
+				"deal": "",
+				"coords": []
+	};
+	$scope.restaurants = RestaurantService.getRestaurants();
 	
 	
 	NgMap.getMap().then(function(map) {
 		console.log('map', map);
 		main.map = map;
 	});
-		
 	
-	$scope.restaurants = RestaurantService.getRestaurants();
 	$scope.lat = "" ;
 	$scope.long = "" ;
 	$scope.mapOptions = {
 			zoom: 15		
 	};
 	
-	
+	/*var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+  	var beachMarker = new google.maps.Marker({
+    position: {lat: -33.890, lng: 151.274},
+    map: map,
+    icon: image
+  });
+*/
 	//get current coords and bind them to scope
 	$ionicPlatform.ready(function(){
 		var posOptions = {timeout: 10000, enableHighAccuracy: true};
@@ -88,22 +102,46 @@ angular.module('starter.controllers', [])
       $scope.$watch('long', updateCenter);
     };
 	
+	//apply a function whe iw button clicked
+	  main.clicked = function() {
+		alert('Clicked a link inside infoWindow');
+	  };
+
+	  
 	  main.restaurant = $scope.restaurants[0];
 
 	//show info window	
-	  $scope.showDetail = function(e, restaurant) {
-		  
-		  main.restaurant = restaurant;
-		  
-    	main.map.showInfoWindow(e, 'iw', restaurant.id);
-	
+	  $scope.showDetails = function(restaurant) {
+		  console.log("showDetails ran");
+		main.restaurant = restaurant;
+		  console.log("1 + main.restaurant");
+		main.map.showInfoWindow('iw', restaurant.id);
 	  };
 
+	  main.hideDetail = function() {
+		main.map.hideInfoWindow('foo-iw');
+	  };
 	
-	//use new address to get new coords and apply them top scope
-	$scope.repositionMap = function(searchbar){
+	/*//function to add restaurants to the database	
+	  main.addRestaurantDetails = function(){
 		
-		$scope.search = angular.copy(searchbar);
+		RestaurantService.addRestaurantDetails(angular.copy(main.newRestaurant));
+		main.newRestaurant = {
+				"id": "",
+				"name": "",
+				"description": "",
+				"deal": "",
+				"coords": []
+		};
+		
+	};*/
+	$scope.x = function(){
+		alert('hedfhksdj');
+	};
+	//use new address to get new coords and apply them top scope
+	$scope.repositionMap = function(){
+		console.log($scope.search + "jkdhfg");
+		$scope.search = "dublin ireland";
 			var url = "http://maps.google.com/maps/api/geocode/json?address=" + $scope.search;
 				$http({
 					method: 'GET',
@@ -112,7 +150,8 @@ angular.module('starter.controllers', [])
 					var releventMapData = response.data.results[0];
 					var searched_lat = releventMapData.geometry.location.lat;
 					var searched_long = releventMapData.geometry.location.lng;
-	
+					
+					
 					$scope.lat = searched_lat;
 					$scope.long = searched_long;
 					
@@ -120,7 +159,13 @@ angular.module('starter.controllers', [])
 					console.log(response.message);
 				});
 			
+			/*//append location to url string http://maps.google.com/maps/api/geocode/json?address=append+this+new,+address
+			//send ajax request to this url string
+			//then update the  $scope.coords
+					//!? use a listener for change to refresh the map view!?*/
 	};
+			//get the map object from the dom
+				//might be a better idea to set the map center in the dom for real time experience
 			
 			
 			//set $scope.coords.latitude == new lat and set $scope.coords.longitude == new long
@@ -174,3 +219,4 @@ $scope.somOtherFunction = function(){
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });
+// JavaScript Document

@@ -3,7 +3,7 @@ app.service('RestaurantService', function(){
 	
 	var restaurants = [
 			{
-				"id": 1,
+				"id": "foo",
 				"name": "Dublin Castle",
 				"description": "Dublin castle, food fit for a king",
 				"deal": "2 for One dining tonight",
